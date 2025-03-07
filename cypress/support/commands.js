@@ -23,3 +23,12 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import { loginSelectors } from '../fixtures/login_selectors';
+
+Cypress.Commands.add('login',(username, password) => {
+    cy.visit('https://www.saucedemo.com/');
+    cy.get(loginSelectors.usernameInput).type(username);
+    cy.get(loginSelectors.passwordInput).type(password);
+    cy.get(loginSelectors.loginButton).click();
+  });

@@ -1,42 +1,49 @@
 import { loginSelectors } from '../fixtures/login_selectors';
 import { inventorySelectors } from '../fixtures/inventory_selectors';
 
-describe('Login Functionality', () => {
-  const username = 'standard_user';
-  const password = 'secret_sauce';
-
-  //Use predefined login to successfully get into the site
-  beforeEach(() => {
+describe('Login Validation', () => {
+  
+  it('should require a username', () => {
     cy.visit('https://www.saucedemo.com/');
-    cy.get(loginSelectors.usernameInput).type(username);
-    cy.get(loginSelectors.passwordInput).type(password);
     cy.get(loginSelectors.loginButton).click();
-    cy.url().should('include', '/inventory.html'); //Confirm successful login state before running tests below
-  });
+    cy.get(loginSelectors.errorMessage).should('have.text','Epic sadface: Username is required');
+  })
 
-  it('should be logged in successfully to the inventory page', () => {
-    cy.get(inventorySelectors.productsList).should('be.visible') //Confirm products section displays on the inventory page
+  it ('should require a password if username is present', () => {
+    cy.visit('https://www.saucedemo.com/');
+    cy.get(loginSelectors.usernameInput).type('standard_user');
+    cy.get(loginSelectors.loginButton).click();
+    cy.get(loginSelectors.errorMessage).should('have.text','Epic sadface: Password is required');
+  })
+
+  it('should get an error message if user is locked out', () => {
+    cy.login('locked_out_user', 'secret_sauce');
+    cy.get(loginSelectors.errorMessage).should('have.text','Epic sadface: Sorry, this user has been locked out.'); 
+  })
+
+  it('should get an error message if user does not exist', () => {
+    cy.login('invalid_user', 'secret_sauce');
+    cy.get(loginSelectors.errorMessage).should('have.text','Epic sadface: Username and password do not match any user in this service'); 
+  })
+
+})
+
+describe('Login Functionality', () => {
+  
+  //Confirm products section displays on the inventory page 
+  it('should redirect to the inventory page with a valid login', () => {
+    cy.login('standard_user', 'secret_sauce');
+    cy.url().should('include', '/inventory.html'); 
+    cy.get(inventorySelectors.productsList).should('be.visible') 
   })
 
   //Click the left menu nav and then the Logout link to go back to the login page
-  it('should be logged out successfully to the login page', () => {
+  it('should be logged out successfully to the login page after clicking Logout', () => {
+    cy.login('standard_user', 'secret_sauce')
     cy.get(inventorySelectors.menuBar).click();
     cy.get(inventorySelectors.logoutLink).should('be.visible').click();
     cy.url().should('not.include', '/inventory.html');
-    cy.get(loginSelectors.loginButton).should('be.visible'); //Confirm login button displays on the page
+    cy.get(loginSelectors.loginButton).should('be.visible'); 
   }) 
-})
 
-describe('Locked Out User', () => {
-  const lockedUsername = 'locked_out_user';
-  const lockedPassword = 'secret_sauce';
-
-  //Use predefined login to generate an error message
-  it('should get an error message instead of logging in', () => {
-    cy.visit('https://www.saucedemo.com/');
-    cy.get(loginSelectors.usernameInput).type(lockedUsername);
-    cy.get(loginSelectors.passwordInput).type(lockedPassword);
-    cy.get(loginSelectors.loginButton).click();
-    cy.contains('Epic sadface: Sorry, this user has been locked out.'); //Confirm new text on the page when locked out
-  })
 })
