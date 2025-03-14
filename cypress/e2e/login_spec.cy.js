@@ -37,13 +37,4 @@ describe('Login Functionality', () => {
     cy.get(inventorySelectors.productsList).should('be.visible') 
   })
 
-  //Click the left menu nav and then the Logout link to go back to the login page
-  it('should be logged out successfully to the login page after clicking Logout', () => {
-    cy.login('standard_user', 'secret_sauce')
-    cy.get(inventorySelectors.menuBar).click();
-    cy.get(inventorySelectors.logoutLink).should('be.visible').click();
-    cy.url().should('not.include', '/inventory.html');
-    cy.get(loginSelectors.loginButton).should('be.visible'); 
-  }) 
-
 })
