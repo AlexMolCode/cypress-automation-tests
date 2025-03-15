@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [chrome, firefox] # Cross browser testing
+        browser: [chrome, firefox] # Enable cross browser testing for Github Actions
     
     steps:
       - name: Checkout repository
