@@ -1,0 +1,29 @@
+name: Run Cypress Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:  # Runs on all PRs, no matter the branch
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox] # Cross browser testing
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # This version will be supported for a while
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress Tests in ${{ matrix.browser }}
+        run: npx cypress run --browser ${{ matrix.browser }} --headless
