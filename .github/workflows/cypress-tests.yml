@@ -7,7 +7,7 @@ on:
   pull_request:  # Runs on all PRs, no matter the branch
 
 jobs:
-  cypress-run:
+  cypress-ui:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -25,5 +25,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Cypress Tests in ${{ matrix.browser }}
+      - name: Run UI Tests in ${{ matrix.browser }}
         run: npx cypress run --browser ${{ matrix.browser }} --headless
+
+  cypress-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run API Tests
+        run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js"
