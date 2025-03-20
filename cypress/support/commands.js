@@ -24,8 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { loginSelectors } from '../fixtures/login_selectors';
-import { menuSelectors } from '../fixtures/menu_selectors';
+import { loginSelectors } from '../fixtures/login-selectors';
+import { menuSelectors } from '../fixtures/menu-selectors';
 
 //Login Commands
 Cypress.Commands.add('login',(username, password) => {

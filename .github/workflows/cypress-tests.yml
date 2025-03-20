@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Run UI Tests in ${{ matrix.browser }}
-        run: npx cypress run --browser ${{ matrix.browser }} --headless
+        run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js"
 
   cypress-api:
     runs-on: ubuntu-latest
