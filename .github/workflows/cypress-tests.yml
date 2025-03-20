@@ -43,4 +43,7 @@ jobs:
         run: npm install
 
       - name: Run API Tests
+        env:
+          CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }}
+          CYPRESS_BOOKING_PASSWORD: ${{ secrets.CYPRESS_BOOKING_PASSWORD }}
         run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js"
