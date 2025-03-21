@@ -25,8 +25,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Clean Reports Folder
+        run: rm -rf cypress/reports || true # Delete reports folder (removes old screenshots, logs etc)
+
       - name: Run UI Tests in ${{ matrix.browser }}
         run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js"
+
+      - name: Upload UI report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-ui-${{ matrix.browser }} # Generates a report for each browser
+          path: cypress/reports/
+          retention-days: 7 # Keep files for 7 days instead of the default 90
 
   cypress-api:
     runs-on: ubuntu-latest
@@ -42,8 +52,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run API Tests
+      - name: Clean Reports Folder
+        run: rm -rf cypress/reports || true
+
+      - name: Run API Tests # Get API auth login from Github secrets
         env:
           CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }}
           CYPRESS_BOOKING_PASSWORD: ${{ secrets.CYPRESS_BOOKING_PASSWORD }}
         run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js"
+
+      - name: Upload API report
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-api
+          path: cypress/reports/
+          retention-days: 7
