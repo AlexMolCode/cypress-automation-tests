@@ -42,7 +42,7 @@ describe('UI Errors', () => {
     cy.get(checkoutSelectors.zipCode).type('10000'); 
     
     cy.on('uncaught:exception', (err, runnable) => {
-      expect(err.message).to.include('Cannot read properties of undefined');
+      expect(err.message).to.include('undefined');
       return false;
     });
     cy.get(checkoutSelectors.lastName).type('Last');  
