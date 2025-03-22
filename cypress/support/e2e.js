@@ -14,4 +14,7 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
+
+// Allows screenshots to be embedded within reports that have failed tests
+import 'cypress-mochawesome-reporter/register';
