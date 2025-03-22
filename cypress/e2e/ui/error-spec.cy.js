@@ -8,7 +8,7 @@ describe('UI Errors', () => {
     cy.login('error_user','secret_sauce');
   }) 
 
-  it('KNOWN BUG: Remove button does not work on the Inventory page', () => {
+  it('KNOWN BUG: Remove button does not work on the inventory page', () => {
     cy.get(inventorySelectors.addBackpackToCart).click();
     
     // This is to catch the error that will occur in the cy.get following this so the test passes
@@ -34,7 +34,7 @@ describe('UI Errors', () => {
     })
   })
     
-  it('KNOWN BUG: Last Name field on the checkout page is not accepting text input', () => {
+  it('KNOWN BUG: Last Name field on the checkout page is not accepting input', () => {
     cy.get(inventorySelectors.addBackpackToCart).click();
     cy.get(inventorySelectors.shoppingCartIcon).click();
     cy.get(shoppingCartSelectors.checkoutButton).click();
