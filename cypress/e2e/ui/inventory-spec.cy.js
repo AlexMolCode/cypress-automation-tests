@@ -1,5 +1,5 @@
-import { inventorySelectors } from '../../fixtures/inventory-selectors';
-import { shoppingCartSelectors } from '../../fixtures/shopping-cart-selectors';
+import { inventorySelectors } from '@/selectors/inventory-selectors';
+import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
 
 describe('Inventory Functionality', () => {
   

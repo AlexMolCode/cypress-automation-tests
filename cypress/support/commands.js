@@ -24,8 +24,11 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { loginSelectors } from '../fixtures/login-selectors';
-import { menuSelectors } from '../fixtures/menu-selectors';
+// Cypress loads this file before every test
+// Check here if you get strange Webpack errors that are hard to debug
+
+import { loginSelectors } from '@/selectors/login-selectors';
+import { menuSelectors } from '@/selectors/menu-selectors';
 
 //Login Commands
 Cypress.Commands.add('login',(username, password) => {

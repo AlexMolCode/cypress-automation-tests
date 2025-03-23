@@ -1,6 +1,6 @@
-import { loginSelectors } from '../../fixtures/login-selectors';
-import { inventorySelectors } from '../../fixtures/inventory-selectors';
-import { shoppingCartSelectors } from '../../fixtures/shopping-cart-selectors';
+import { loginSelectors } from '@/selectors/login-selectors';
+import { inventorySelectors } from '@/selectors/inventory-selectors';
+import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
 
 describe('Mobile Testing - Using Galaxy S main series screensize', () => {
 

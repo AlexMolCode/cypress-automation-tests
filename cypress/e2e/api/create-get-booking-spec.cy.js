@@ -1,4 +1,4 @@
-import { baseBooking } from '../../data/booking-data';
+import { baseBooking } from '@/data/booking-data';
 
 describe('Create and retrieve booking API Tests', () => {
   let bookingId;

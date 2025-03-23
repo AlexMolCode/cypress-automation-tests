@@ -1,6 +1,6 @@
-import { checkoutSelectors } from '../../fixtures/checkout-selectors';
-import { inventorySelectors } from '../../fixtures/inventory-selectors';
-import { shoppingCartSelectors } from '../../fixtures/shopping-cart-selectors';
+import { checkoutSelectors } from '@/selectors/checkout-selectors';
+import { inventorySelectors } from '@/selectors/inventory-selectors';
+import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
 
 describe('UI Errors', () => {
   
