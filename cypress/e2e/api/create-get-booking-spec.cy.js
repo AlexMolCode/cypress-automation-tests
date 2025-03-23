@@ -1,17 +1,17 @@
 import { baseBooking } from '../../data/booking-data';
 
-describe("Create and Retrieve Booking API Tests", () => {
+describe('Create and retrieve booking API Tests', () => {
   let bookingId;
   
   // Create a new booking
-  it("Should create a new booking successfully", () => {
+  it('Should create a new booking successfully', () => {
     cy.request({
-      method: "POST",
-      url: "/booking",
+      method: 'POST',
+      url: '/booking',
       body: baseBooking
     }).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body).to.have.property("bookingid");
+      expect(response.body).to.have.property('bookingid');
       bookingId = response.body.bookingid; // Store the booking ID for the next test
       });
   });
@@ -19,7 +19,7 @@ describe("Create and Retrieve Booking API Tests", () => {
     // Retrieve and verify the created booking
   it("Should retrieve the created booking and confirm details", () => {
     cy.request({
-      method: "GET",
+      method: 'GET',
       url: `/booking/${bookingId}`
     }).then((response) => {
       expect(response.status).to.eq(200);
