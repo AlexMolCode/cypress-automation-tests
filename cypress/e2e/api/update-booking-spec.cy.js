@@ -1,30 +1,8 @@
+import { baseBooking, updatedBooking } from '../../data/booking-data';
+
 describe("Update booking API Test", () => {
   let bookingId; 
   let authToken;
-  
-  const initialBooking = {
-    firstname: "John",
-    lastname: "Doe",
-    totalprice: 150,
-    depositpaid: true,
-    bookingdates: {
-      checkin: "2024-06-01",
-      checkout: "2024-06-10"
-    },
-    additionalneeds: "Breakfast"
-  };
-  
-  const updatedBooking = {
-    firstname: "Jane",
-    lastname: "Smith",
-    totalprice: 200,
-    depositpaid: false,
-    bookingdates: {
-      checkin: "2024-07-01",
-      checkout: "2024-07-10"
-    },
-    additionalneeds: "Dinner"
-  };
   
   // Log in to generate auth token then create an initial booking for the test
   before(() => {
@@ -42,7 +20,7 @@ describe("Update booking API Test", () => {
     cy.request({
       method: "POST",
       url: "/booking",
-      body: initialBooking
+      body: baseBooking
     }).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.have.property("bookingid");
