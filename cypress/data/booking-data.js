@@ -11,13 +11,13 @@ export const baseBooking = {
 } 
 
 export const updatedBooking = {
-    firstname: 'Jane',
-    lastname: 'Smith',
-    totalprice: 200,
-    depositpaid: false,
-    bookingdates: {
-      checkin: '2024-07-01',
-      checkout: '2024-07-10'
-    },
-    additionalneeds: 'Dinner'
-  };
+  firstname: 'Jane',
+  lastname: 'Smith',
+  totalprice: 200,
+  depositpaid: false,
+  bookingdates: {
+    checkin: '2024-07-01',
+    checkout: '2024-07-10'
+  },
+  additionalneeds: 'Dinner'
+}
