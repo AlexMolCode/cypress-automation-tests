@@ -1,5 +1,5 @@
-import { loginSelectors } from '../../fixtures/login-selectors';
-import { inventorySelectors } from '../../fixtures/inventory-selectors';
+import { loginSelectors } from '@/selectors/login-selectors';
+import { inventorySelectors } from '@/selectors/inventory-selectors';
 
 describe('Login Validation', () => {
   

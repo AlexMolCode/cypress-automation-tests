@@ -13,6 +13,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+// Cypress loads this file before every test
+
 // Import commands.js using ES2015 syntax:
 import './commands';
 

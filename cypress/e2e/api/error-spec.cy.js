@@ -1,4 +1,4 @@
-import { baseBooking } from '../../data/booking-data';
+import { baseBooking } from '@/data/booking-data';
 
 describe('API error tests', () => { 
   it ('KNOWN BUG: API errors when First Name field is not a string', () => {

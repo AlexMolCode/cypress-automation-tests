@@ -1,7 +1,7 @@
-import { menuSelectors } from '../../fixtures/menu-selectors';
-import { inventorySelectors } from '../../fixtures/inventory-selectors';
-import { shoppingCartSelectors } from '../../fixtures/shopping-cart-selectors';
-import { loginSelectors } from '../../fixtures/login-selectors';
+import { menuSelectors } from '@/selectors/menu-selectors';
+import { inventorySelectors } from '@/selectors/inventory-selectors';
+import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
+import { loginSelectors } from '@/selectors/login-selectors';
 
 //Test left side menu for the site on multiple pages to confirm essential functionality is not broken
 //Also test the navigation links within the menu
