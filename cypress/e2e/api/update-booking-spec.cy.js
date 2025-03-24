@@ -9,7 +9,10 @@ describe('Update booking API Test', () => {
     cy.request({
       method: 'POST',
       url: '/auth',
-      body: { username: Cypress.env('BOOKING_USERNAME'), password: Cypress.env('BOOKING_PASSWORD')}
+      body: { 
+        username: Cypress.env('BOOKING_USERNAME'), 
+        password: Cypress.env('BOOKING_PASSWORD')
+      }
     }).then((response) => {
       expect(response.status).to.eq(200);
       
@@ -27,13 +30,31 @@ describe('Update booking API Test', () => {
       bookingId = response.body.bookingid;
     });
   });
+
+  it('Should return 400 Bad Request if not all required fields are included in PUT request', () => {
+    cy.request({
+      method: 'PUT',
+      url: `/booking/${bookingId}`,
+      failOnStatusCode: false,
+      
+      // Include authentication token from above which is required for booking updates
+      headers: { 'Cookie': `token=${authToken}` },
+      
+      // This is missing other necessary fields like totalprice, bookingdates etc
+      body: {
+        firstname: "Jane", 
+        lastname: "Rivera"
+      }
+    }).then((response) => {
+      expect(response.status).to.eq(400);
+      expect(response.body).to.equal('Bad Request');
+    })
+  })
   
   it('Should update all booking fields properly', () => {
     cy.request({
       method: 'PUT',
       url: `/booking/${bookingId}`,
-      
-      // Include authentication token from above which is required for booking updates
       headers: { 'Cookie': `token=${authToken}` },
       body: updatedBooking
     }).then((response) => {

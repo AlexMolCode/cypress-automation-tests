@@ -13,7 +13,7 @@ describe('API error tests', () => {
       body: {
         ...baseBooking,
         firstname: 123
-    }
+      }
     }).then((response) => {
       expect(response.status).to.eq(500);
       expect(response.body).to.equal('Internal Server Error');
@@ -28,7 +28,7 @@ describe('API error tests', () => {
       body: {
         ...baseBooking,
         lastname: 456
-    }
+      }
     }).then((response) => {
       expect(response.status).to.eq(500);
       expect(response.body).to.equal('Internal Server Error');
@@ -49,7 +49,7 @@ describe('API invalid value tests', () => {
         body: {
           ...baseBooking,
           depositpaid: invalidValue
-      }
+        }
       }).then((response) => {
         expect(response.status).to.eq(200);
         expect(response.body).to.have.property('bookingid');
