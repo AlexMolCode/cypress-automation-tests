@@ -3,7 +3,10 @@ describe('Successful Authentication', () => {
     cy.request({
       method: 'POST',
       url: '/auth',
-      body: { username: Cypress.env('BOOKING_USERNAME'), password: Cypress.env('BOOKING_PASSWORD')},
+      body: { 
+        username: Cypress.env('BOOKING_USERNAME'), 
+        password: Cypress.env('BOOKING_PASSWORD')
+      },
     }).then((response) => {
       expect(response.status).to.eq(200);
       
@@ -21,7 +24,10 @@ describe('Failed Authentication', () => {
     cy.request({
       method: 'POST',
       url: '/auth',
-      body: { username: 'admin', password: 'pass' },
+      body: { 
+        username: 'admin', 
+        password: 'pass' 
+      },
     }).then((response) => {
       expect(response.status).to.eq(200); 
       expect(response.body).to.deep.equal({ reason: 'Bad credentials' });
@@ -43,7 +49,10 @@ describe('Failed Authentication', () => {
     cy.request({
       method: 'POST',
       url: '/auth',
-      body: { username: '', password: '' },
+      body: { 
+        username: '', 
+        password: '' 
+      },
     }).then((response) => {
       expect(response.status).to.eq(200); 
       expect(response.body).to.deep.equal({ reason: 'Bad credentials' });
