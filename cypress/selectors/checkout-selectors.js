@@ -3,5 +3,8 @@ export const checkoutSelectors = {
   lastName: '#last-name',
   zipCode: '#postal-code',
   continueButton: '#continue',
-  finishButton: '#finish'
+  finishButton: '#finish',
+  thankYouText: '.complete-header',
+  checkoutComplete: '.title',
+  homeButton: '#back-to-products'
 }
