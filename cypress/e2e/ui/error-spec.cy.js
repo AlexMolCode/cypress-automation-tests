@@ -8,7 +8,7 @@ describe('UI Errors', () => {
     cy.login('error_user','secret_sauce');
   }) 
 
-  it('KNOWN BUG: Remove button does not work on the inventory page', () => {
+  it('BUG: "Remove" button does not work on the Inventory page', () => {
     cy.get(inventorySelectors.addBackpackToCart).click();
     
     // This is to catch the error that will occur in the cy.get following this so the test passes
@@ -20,7 +20,7 @@ describe('UI Errors', () => {
   })
 
   // The bug in this case calls an alert box, so I use a stub method to catch it and assert it neatly in the loop
-  it('KNOWN BUG: Only the first sorting option works on the inventory page', () => {
+  it('BUG: Only the first sorting option works on the Inventory page', () => {
     const dropdownOptions = ['Name (Z to A)', 'Price (low to high)', 'Price (high to low)'];
     const alertStub = cy.stub();
     cy.on('window:alert', alertStub);
@@ -34,7 +34,7 @@ describe('UI Errors', () => {
     })
   })
     
-  it('KNOWN BUG: Last Name field on the checkout page is not accepting input', () => {
+  it('BUG: "Last Name" field on the checkout page is not accepting input', () => {
     cy.get(inventorySelectors.addBackpackToCart).click();
     cy.get(inventorySelectors.shoppingCartIcon).click();
     cy.get(shoppingCartSelectors.checkoutButton).click();
@@ -48,7 +48,7 @@ describe('UI Errors', () => {
     cy.get(checkoutSelectors.lastName).type('Last');  
     })
 
-  it('KNOWN BUG: Finish button is not clickable on final checkout page', () => {
+  it('BUG: "Finish" button is not clickable on final Checkout page', () => {
     cy.get(inventorySelectors.addBackpackToCart).click();
     cy.get(inventorySelectors.shoppingCartIcon).click();
     cy.get(shoppingCartSelectors.checkoutButton).click();

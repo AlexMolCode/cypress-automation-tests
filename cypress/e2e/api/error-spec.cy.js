@@ -1,7 +1,7 @@
 import { baseBooking } from '@/data/booking-data';
 
 describe('API error tests', () => { 
-  it ('KNOWN BUG: API errors when First Name field is not a string', () => {
+  it ('BUG: API returns error when "firstname" field is not a string', () => {
     cy.request({
       method: 'POST',
       url: '/booking',
@@ -20,7 +20,7 @@ describe('API error tests', () => {
     });
   });
 
-  it ('KNOWN BUG: API errors when Last Name field is not a string', () => {
+  it ('BUG: API returns error when "lastname" field is not a string', () => {
     cy.request({
       method: 'POST',
       url: '/booking',
@@ -36,13 +36,13 @@ describe('API error tests', () => {
   });
 })
 
-// Test both string and numerical values to show field is not erroring out correctly
+// 
 describe('API invalid value tests', () => { 
   const invalidDepositValues = ['x', 4];
   
-  //Test both values using a loop through the small array above
+  // The "depositpaid" field should only accept boolean values (true/false)
   invalidDepositValues.forEach((invalidValue) => { 
-    it (`KNOWN BUG: Depositpaid field converts invalid value (${invalidValue}) to true`, () => {
+    it (`BUG: "depositpaid" field converts invalid value (${invalidValue}) to true`, () => {
       cy.request({
         method: 'POST',
         url: '/booking',
@@ -58,7 +58,8 @@ describe('API invalid value tests', () => {
     });
   });
 
-  it('KNOWN BUG: Totalprice converts a string value to null instead of sending error', () => {
+  // The "totalprice" field should only accept decimal values
+  it('BUG: "totalprice" converts a string value to null instead of returning an error', () => {
     cy.request({
       method: 'POST',
       url: '/booking',
