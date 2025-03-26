@@ -64,14 +64,14 @@ describe('Update booking API Test', () => {
       expect(response.body).to.deep.equal(updatedBooking); 
     });
   
-    // Verify the booking update just made
+    // Verify the booking update
     cy.request({
       method: 'GET',
       url: `/booking/${bookingId}`
     }).then((getResponse) => {
       expect(getResponse.status).to.eq(200);
 
-      // Confirm data changed via update is actually saved to the DB
+      // Confirm data changed via update is saved to the DB
       expect(getResponse.body).to.deep.equal(updatedBooking); 
     });
   });
