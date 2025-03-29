@@ -42,8 +42,8 @@ describe('Update booking API Test', () => {
       
       // This is missing other necessary fields like totalprice, bookingdates etc
       body: {
-        firstname: "Jane", 
-        lastname: "Rivera"
+        firstname: 'Jane', 
+        lastname: 'Rivera'
       }
     }).then((response) => {
       expect(response.status).to.eq(400);

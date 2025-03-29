@@ -26,8 +26,8 @@ describe('Failed Authentication', () => {
       method: 'POST',
       url: '/auth',
       body: { 
-        username: "admin", 
-        password: "pass" 
+        username: 'admin', 
+        password: 'pass' 
       },
     }).then((response) => {
 
@@ -42,7 +42,7 @@ describe('Failed Authentication', () => {
     cy.request({
       method: 'POST',
       url: '/auth',
-      body: { username: "admin" },
+      body: { username: 'admin' },
     }).then((response) => {
       expect(response.status).to.eq(200); 
       expect(response.body).to.deep.equal({ reason: 'Bad credentials' });
@@ -55,8 +55,8 @@ describe('Failed Authentication', () => {
       method: 'POST',
       url: '/auth',
       body: { 
-        username: "", 
-        password: "" 
+        username: '', 
+        password: '' 
       },
     }).then((response) => {
       expect(response.status).to.eq(200); 
