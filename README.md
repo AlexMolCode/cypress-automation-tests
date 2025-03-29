@@ -22,26 +22,36 @@ This project showcases my end-to-end UI and API automation skills using [Cypress
 ```bash
 project-root/
 ├── cypress/
-|   ├── e2e/
-│   |   ├── api/         # Cypress API tests (Restful Booker)
-│   |   ├── ui/          # Cypress UI tests (SauceDemo)
-|   ├── support/         # Custom commands and shared test setup
-|   ├── reports/         # Mochawesome test reports
-|   ├── data/            # Static data and request bodies for API tests
-|   ├── selectors/       # Page object-style selectors for UI tests
+│   ├── e2e/
+│   │   ├── api/         # Cypress API tests (Restful Booker)
+│   │   ├── ui/          # Cypress UI tests (SauceDemo)
+│   ├── support/         # Custom commands and shared test setup
+│   ├── reports/         # Mochawesome test reports (gitignored)
+│   ├── data/            # Static data and request bodies for API tests
+│   ├── selectors/       # Page object-style selectors for UI tests
 ├── cypress.config.js    # Cypress configuration file
-├── cypress.env.json     # (Gitignored) local env vars for tests
+├── cypress.env.json     # Local environment variables for API auth (gitignored)
 ├── package.json         # Project dependencies
 ├── .gitignore           # Files and folders ignored by Git
-├── README.md            # Project summary and test instructions
+├── README.md            # Project overview and setup instructions
+├── bug-reports          # Screenshots of JIRA-style bug tickets
 ```
-## How to Run the Tests
-1. Install dependencies: `npm install`
-2. Run all tests: `npx cypress run`
-<br>or<br>  
-3. Run by type:
-<br>`npx cypress run --spec "cypress/e2e/api/*.cy.js"`
-<br>`npx cypress run --spec "cypress/e2e/ui/*.cy.js"`
+## How to Run the Tests Locally
+1. Make sure you have Git installed: [Download Git](https://git-scm.com/downloads)
+2. Clone this repo to your machine: `git clone https://github.com/AlexMolCode/cypress-automation-tests.git`
+3. Navigate to the project directory and install dependencies (includes Cypress): `npm install`
+4. To run API tests, create a `cypress.env.json` file in the root directory. This is required to provide authentication values for generating a token.
+   You can retrieve the credentials from the  [Restful Booker site](https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-CreateBooking)
+```json
+{
+  "BOOKING_USERNAME": "X",
+  "BOOKING_PASSWORD": "Y"
+}
+```
+5. Run all tests: `npx cypress run`
+6. Run tests by type:
+- API tests: `npx cypress run --spec "cypress/e2e/api/*.cy.js"`
+- UI tests: `npx cypress run --spec "cypress/e2e/ui/*.cy.js"`
 
 ## Bug Reports
 Automated tests for known bugs are located in:
@@ -62,7 +72,7 @@ After each run, Cypress generates reports in the cypress/reports/ folder:
 
 If you are testing this repo locally, you can follow these steps:
 - Run this to generate a new report after running all the spec files: `npx cypress run`
-- Open the HTML report here: cypress/reports/mochawesome.html
+- Open the HTML report here: `cypress/reports/index.html`
 
 If you want to see the reports on Github, you can go to the link [here](https://github.com/AlexMolCode/cypress-automation-tests/actions) and download the previously run reports.<br>
 Note: GitHub does not render HTML reports in-browser. You’ll need to download and open them locally.
