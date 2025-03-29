@@ -35,11 +35,21 @@ project-root/
 ├── .gitignore           # Files and folders ignored by Git
 ├── README.md            # Project summary and test instructions
 ```
-## How to Run the Tests
-1. Install dependencies: `npm install`
-2. Run all tests: `npx cypress run`
+## How to Run the Tests Locally
+1. Make sure you have Git installed on your computer: [Download Git](https://git-scm.com/downloads)
+2. Clone my repo to your desktop: `git clone https://github.com/AlexMolCode/cypress-automation-tests.git`
+3. Install my project dependencies (includes Cypress): `npm install`
+4. To run all API tests successfully, create a `cypress.env.json` file in the root project (as shown above) to insert the auth login to create the API token. 
+  The file format should be as such below where the values of "x" and "y" can be found on the [Restful Booker site](https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-CreateBooking)
+```bash
+{
+  "BOOKING_USERNAME": "X",
+  "BOOKING_PASSWORD": "Y"
+}
+```
+5. Run all tests: `npx cypress run`
 <br>or<br>  
-3. Run by type:
+5. Run by type:
 <br>`npx cypress run --spec "cypress/e2e/api/*.cy.js"`
 <br>`npx cypress run --spec "cypress/e2e/ui/*.cy.js"`
 
