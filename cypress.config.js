@@ -3,6 +3,7 @@ const webpack = require('@cypress/webpack-preprocessor');
 const webpackConfig = require('./webpack.config.js');
 
 module.exports = defineConfig({
+  projectId: 'in78pu', // Project ID is used for Cypress Cloud
   e2e: {
     baseUrl: 'https://restful-booker.herokuapp.com',
     setupNodeEvents(on, config) {
