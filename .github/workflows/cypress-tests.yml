@@ -29,7 +29,9 @@ jobs:
         run: rm -rf cypress/reports || true # Delete reports folder (removes old screenshots, logs etc)
 
       - name: Run UI Tests in ${{ matrix.browser }}
-        run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js"
+        env: 
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Get record key from Github secrets for Cypress Cloud runs
+        run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js" --record
 
       - name: Upload UI report
         uses: actions/upload-artifact@v4
@@ -55,11 +57,12 @@ jobs:
       - name: Clean Reports Folder
         run: rm -rf cypress/reports || true
 
-      - name: Run API Tests # Get API auth login from Github secrets
+      - name: Run API Tests 
         env:
-          CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }}
+          CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }} # Get API auth login from Github secrets
           CYPRESS_BOOKING_PASSWORD: ${{ secrets.CYPRESS_BOOKING_PASSWORD }}
-        run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js"
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} 
+        run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js" --record
 
       - name: Upload API report
         uses: actions/upload-artifact@v4
