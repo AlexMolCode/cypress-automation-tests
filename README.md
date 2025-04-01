@@ -102,6 +102,10 @@ Note: API tests using cy.request() are executed in Node (not in the browser). Be
 
 Here is documentation on Cypress Cloud's Test Replay to step through previous test runs: [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
 
+Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs)
+
+If testing locally, you can also push local runs to the cloud via `npx cypress run --record` on the command line.
+
 ## What This Project Demonstrates
 
 - Writing Cypress tests for both **UI** and **API** flows
