@@ -31,7 +31,7 @@ jobs:
       - name: Run UI Tests in ${{ matrix.browser }}
         env: 
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Get record key from Github secrets for Cypress Cloud runs
-        run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js" --record
+        run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js" --record --group "UI Tests - ${{ matrix.browser }}"
 
       - name: Upload UI report
         uses: actions/upload-artifact@v4
@@ -62,7 +62,7 @@ jobs:
           CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }} # Get API auth login from Github secrets
           CYPRESS_BOOKING_PASSWORD: ${{ secrets.CYPRESS_BOOKING_PASSWORD }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} 
-        run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js" --record
+        run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js" --record --group "API Tests"
 
       - name: Upload API report
         uses: actions/upload-artifact@v4
