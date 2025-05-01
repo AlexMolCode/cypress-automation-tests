@@ -13,7 +13,7 @@ This project showcases my end-to-end UI and API automation skills using [Cypress
 | API Testing | Cypress API tests using [Restful Booker](https://restful-booker.herokuapp.com/apidoc). Shows automated testing of CRUD APIs. |
 | CI/CD | Cypress tests running in GitHub Actions using both Chrome and Firefox. Shows enforcement that automated tests must pass before merging. |
 | Bug Tracking | Known issues documented in JIRA, with test coverage for expected vs. actual behavior. Shows communication of bug issues to stakeholders. |
-| Reporting | Reports using Mochawesome (locally) and Cypress Cloud. Shows passed/fail tests in easier to read reports. |
+| Reporting | Reports using Mochawesome (locally) and Cypress Cloud. Shows pass/fail tests in easier to read reports. |
 
 ---
 
@@ -48,10 +48,11 @@ project-root/
   "BOOKING_PASSWORD": "Y"
 }
 ```
-5. Run all tests: `npx cypress run`
-6. Run tests by type:
+5. Run all tests on the command line: `npx cypress run`
+6. Run tests by type on the command line:
 - API tests: `npx cypress run --spec "cypress/e2e/api/*.cy.js"`
 - UI tests: `npx cypress run --spec "cypress/e2e/ui/*.cy.js"`
+7. Or use the Cypress test runner UI to run tests individually.
 
 ## Bug Reports
 Automated tests for known bugs are located in:
@@ -72,7 +73,7 @@ After each run, Cypress generates reports in the cypress/reports/ folder. This i
 - An HTML summary of test results and statuses
 - Screenshots for failed tests (automatically captured)
 
-You can also view test reports generated during GitHub Actions by visiting the [Actions](https://github.com/AlexMolCode/cypress-automation-tests/actions) tab and downloading the report artifacts.
+You can also view test reports generated during GitHub Actions by visiting the [Actions](https://github.com/AlexMolCode/cypress-automation-tests/actions) tab and downloading the report artifacts.  
 Note: GitHub does not render HTML reports in-browser. You must download them to view locally.
 
 ## Cypress Cloud Integration
@@ -82,7 +83,6 @@ Cypress Cloud includes:
 - Screenshots, videos, and command logs for each test
 - Test Replay button for step-by-step debugging
 
-Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs)
-Note: API tests using cy.request() are executed in Node (not in the browser). Because of this, console logs and network activity will not appear in Cloud replay like they do in UI tests.
+Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs).  
+Note: API tests using cy.request() are executed in Node (not in the browser). Because of this, console logs and network activity will not appear in Cloud replay like they do in UI tests.  
 Here is documentation on Cypress Cloud's Test Replay to step through previous test runs: [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
-If testing locally, you can also push local runs to the cloud via `npx cypress run --record` on the command line.
