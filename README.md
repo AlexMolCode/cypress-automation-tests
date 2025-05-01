@@ -8,12 +8,12 @@ This project showcases my end-to-end UI and API automation skills using [Cypress
 
 | Area | Description |
 |------|-------------|
-| UI Testing | Cypress UI tests using [SauceDemo](https://www.saucedemo.com/) |
-| Mobile Testing | Dedicated spec that tests the SauceDemo site UI in mobile view |
-| API Testing | Cypress API tests using [Restful Booker](https://restful-booker.herokuapp.com/apidoc) |
-| CI/CD | Cypress tests running in GitHub Actions using both Chrome and Firefox |
-| Bug Tracking | Known issues documented in JIRA, with test coverage for expected vs. actual behavior |
-| Reporting | Tests include Mochawesome reports and screenshots of failed runs |
+| UI Testing | Cypress UI tests using [SauceDemo](https://www.saucedemo.com/). Shows automated end to end testing of an ecommerce site. |
+| Mobile Testing | Dedicated spec that tests the SauceDemo site UI in mobile view. Shows the importance of UI testing on mobile. |
+| API Testing | Cypress API tests using [Restful Booker](https://restful-booker.herokuapp.com/apidoc). Shows automated testing of CRUD APIs. |
+| CI/CD | Cypress tests running in GitHub Actions using both Chrome and Firefox. Shows enforcement that automated tests must pass before merging. |
+| Bug Tracking | Known issues documented in JIRA, with test coverage for expected vs. actual behavior. Shows communication of bug issues to stakeholders. |
+| Reporting | Reports using Mochawesome (locally) and Cypress Cloud. Shows passed/fail tests in easier to read reports. |
 
 ---
 
@@ -59,60 +59,30 @@ Automated tests for known bugs are located in:
 - `api-error-spec.cy.js`
 - `auth.cy.js` (for authentication-related errors)<br>
 
-Screenshots of the corresponding JIRA-style bug tickets are stored in the `bug-reports/` folder in the project root. Each file is named using the JIRA ticket number and a short description. The folder of screenshots on Github is linked [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports)
+To address the challenge of accessing a JIRA board, I have taken screenshots of the bug tickets I created instead. Each file is named using the JIRA ticket number and a short description. The folder of screenshots on Github is linked [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports)
 
 ## CI/CD via GitHub Actions
-This project is integrated with GitHub Actions to automatically run Cypress tests on *every* pull request. The pipeline runs:
+This project is integrated with GitHub Actions to automatically run Cypress tests with *every* pull request. The pipeline runs:
 - All UI tests using both Chrome and Firefox
 - All API tests
-- Headless Cypress execution in parallel jobs
-- Automatic test reporting via Mochawesome<br>
-
 These checks ensure that all test cases are validated before any code is merged, simulating a real-world CI/CD pipeline.
 
 ## Local Test Reports with Mochawesome
-
 After each run, Cypress generates reports in the cypress/reports/ folder. This includes:
 - An HTML summary of test results and statuses
 - Screenshots for failed tests (automatically captured)
-- A visual way to review test coverage when running locally
 
-To view the report:
-- Run all tests: `npx cypress run`
-- Open the HTML report: `cypress/reports/index.html`
-
-CI Reports: You can also view test reports generated during GitHub Actions by visiting the [Actions](https://github.com/AlexMolCode/cypress-automation-tests/actions) tab and downloading the report artifacts.
-
+You can also view test reports generated during GitHub Actions by visiting the [Actions](https://github.com/AlexMolCode/cypress-automation-tests/actions) tab and downloading the report artifacts.
 Note: GitHub does not render HTML reports in-browser. You must download them to view locally.
 
 ## Cypress Cloud Integration
-All test runs (UI and API) are automatically recorded to Cypress Cloud via GitHub Actions on every pull request.
+All test runs are automatically recorded to Cypress Cloud via GitHub Actions on every pull request.
 
 Cypress Cloud includes:
-- Full test run history (per PR or commit)
 - Screenshots, videos, and command logs for each test
-- Test Replay for step-by-step debugging of failures
-
-Runs are grouped by test type:
-- UI Tests – Chrome
-- UI Tests – Firefox
-- API Tests
-
-Note: API tests using cy.request() are executed in Node (not in the browser). Because of this, console logs and network activity will not appear in Cloud replay like they do in UI tests.
-
-Here is documentation on Cypress Cloud's Test Replay to step through previous test runs: [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
+- Test Replay button for step-by-step debugging
 
 Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs)
-
+Note: API tests using cy.request() are executed in Node (not in the browser). Because of this, console logs and network activity will not appear in Cloud replay like they do in UI tests.
+Here is documentation on Cypress Cloud's Test Replay to step through previous test runs: [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
 If testing locally, you can also push local runs to the cloud via `npx cypress run --record` on the command line.
-
-## What This Project Demonstrates
-
-- Writing Cypress tests for both **UI** and **API** flows
-- Testing and documenting known bugs and unexpected behaviors
-- Handling incorrect API status codes and validation edge cases
-- Integrating tests with **CI/CD** via GitHub Actions (Chrome, Firefox)
-- Recording test runs to **Cypress Cloud** for visibility, replay, and debugging
-- Generating HTML reports with **Mochawesome** for local runs
-- Cross-referencing test failures with **JIRA-style bug tickets**
-
