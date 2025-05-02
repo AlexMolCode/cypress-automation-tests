@@ -1,3 +1,5 @@
+// These tests are the UI errors found on saucedemo.com using the 'error_user' credentials
+
 import { checkoutSelectors } from '@/selectors/checkout-selectors';
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';

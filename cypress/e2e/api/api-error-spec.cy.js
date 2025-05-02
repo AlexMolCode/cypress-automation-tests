@@ -1,3 +1,5 @@
+// Error test scenarios for Restful Booker's CRUD API
+
 import { baseBooking } from '@/data/booking-data';
 
 describe('API error tests', () => { 

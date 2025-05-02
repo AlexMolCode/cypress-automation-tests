@@ -1,3 +1,5 @@
+// Test the Login page validation and functionality on saucedemo.com
+
 import { loginSelectors } from '@/selectors/login-selectors';
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 

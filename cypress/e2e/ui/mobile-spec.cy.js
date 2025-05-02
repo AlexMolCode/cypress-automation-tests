@@ -1,3 +1,5 @@
+// Test the site UI of saucedemo.com on a mobile screen
+
 import { loginSelectors } from '@/selectors/login-selectors';
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
