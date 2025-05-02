@@ -3,6 +3,7 @@
 import { loginSelectors } from '@/selectors/login-selectors';
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
+import { checkoutSelectors } from '@/selectors/checkout-selectors';
 
 describe('Mobile Testing - Using Galaxy S main series screensize', () => {
 
@@ -36,13 +37,23 @@ describe('Mobile Testing - Using Galaxy S main series screensize', () => {
       cy.closeMenu();
     })
 
-    it('Should be able to add product to cart on mobile', () => {
+    it('Should be able to checkout a product and complete an order on mobile', () => {
       cy.login('standard_user','secret_sauce');
       cy.get(inventorySelectors.shoppingCartIcon).invoke('text').should('be.empty'); 
       cy.get(inventorySelectors.addBackpackToCart).click();
       cy.get(inventorySelectors.shoppingCartIcon).invoke('text').should('not.be.empty'); 
       cy.get(inventorySelectors.shoppingCartIcon).click();
       cy.get(shoppingCartSelectors.productName).should('have.text','Sauce Labs Backpack');
+      cy.get(shoppingCartSelectors.checkoutButton).click();
+      cy.get(checkoutSelectors.firstName).type('First');
+      cy.get(checkoutSelectors.lastName).type('Last');
+      cy.get(checkoutSelectors.zipCode).type('10000'); 
+      cy.get(checkoutSelectors.continueButton).click();
+      cy.get(checkoutSelectors.finishButton).click();
+      cy.get(checkoutSelectors.checkoutComplete).should('have.text','Checkout: Complete!');  
+      cy.get(checkoutSelectors.thankYouText).should('have.text','Thank you for your order!');
+      cy.get(checkoutSelectors.homeButton).should('be.visible').click();
+      cy.url().should('include', '/inventory.html');   
     })
 
 })
