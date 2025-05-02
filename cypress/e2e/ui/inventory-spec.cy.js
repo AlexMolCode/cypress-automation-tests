@@ -1,3 +1,5 @@
+// Test adding/removing products with shopping cart and item sorting on the Inventory page for saucedemo.com
+
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
 

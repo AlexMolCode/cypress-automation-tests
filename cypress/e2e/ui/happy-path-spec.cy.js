@@ -1,3 +1,5 @@
+// Successfully adding a product to the shopping cart and completing the order on saucedemo.com
+
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';
 import { checkoutSelectors } from '@/selectors/checkout-selectors';

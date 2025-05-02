@@ -1,3 +1,5 @@
+// UPDATE a booking after creating one using Restful Booker's CRUD API
+
 import { baseBooking, updatedBooking } from '@/data/booking-data';
 
 describe('Update booking API Test', () => {

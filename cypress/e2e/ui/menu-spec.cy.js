@@ -1,3 +1,5 @@
+// Test the links on the leftside navigation menu on saucedemo.com
+
 import { menuSelectors } from '@/selectors/menu-selectors';
 import { inventorySelectors } from '@/selectors/inventory-selectors';
 import { shoppingCartSelectors } from '@/selectors/shopping-cart-selectors';

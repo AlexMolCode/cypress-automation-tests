@@ -1,3 +1,5 @@
+// CREATE and READ a new booking using Restful Booker's CRUD API
+
 import { baseBooking } from '@/data/booking-data';
 
 describe('Create and retrieve booking API Tests', () => {

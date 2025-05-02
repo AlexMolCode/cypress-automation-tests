@@ -1,3 +1,5 @@
+// Authentication scenarios using Restful Booker's CRUD API
+
 describe('Successful Authentication', () => {
   it('Should generate a token with valid login', () => {
     cy.request({
