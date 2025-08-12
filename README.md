@@ -20,15 +20,15 @@ This project showcases my end-to-end UI and API automation skills using Cypress,
 ## Folder Structure
 
 ```bash
-project-root/
+cypress-automation-tests/
 ├── cypress/
 │   ├── e2e/
 │   │   ├── api/         # API tests (Restful Booker)
 │   │   ├── ui/          # UI tests (SauceDemo)
-│   ├── support/         # Reusable UI commands (login, navigation)
-│   ├── reports/         # Mochawesome test reports (local only)
 │   ├── data/            # Static records for API test inputs
+│   ├── reports/         # Mochawesome test reports (local only)
 │   ├── selectors/       # Page object Model selectors for UI tests
+│   ├── support/         # Reusable UI commands (login, navigation)
 ├── bug-reports          # Screenshots of Jira bug tickets
 ```
 ## Running Tests Locally
