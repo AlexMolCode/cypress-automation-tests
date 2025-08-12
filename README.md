@@ -36,7 +36,7 @@ project-root/
 2. Clone this repo to your machine: `git clone https://github.com/AlexMolCode/cypress-automation-tests.git`
 3. Navigate to the downloaded project directory (cypress-automation-tests) and install dependencies (includes Cypress): `npm install`
 4. To successfully run API tests that require an authentication token, create a `cypress.env.json` file in the root directory with the JSON record below.
-   Retrieve the credentials from the Restful Booker [API docs](https://restful-booker.herokuapp.com/apidoc/index.html#api-Auth-CreateToken)
+   Retrieve the credentials from the Restful Booker [API docs](https://restful-booker.herokuapp.com/apidoc/index.html#api-Auth-CreateToken).
 ```json
 {
   "BOOKING_USERNAME": "api-username",
@@ -55,7 +55,7 @@ Automated tests for known bugs are located in:
 - `api-error-spec.cy.js`
 - `auth.cy.js` (for authentication-related errors)<br>
 
-Since the JIRA board isn’t publicly accessible, I’ve included screenshots of the bug tickets I created. Each file is named with its Jira ticket number and a short description, and those ticket IDs match the ones referenced in the test cases above. View the folder [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports)
+Since the JIRA board isn’t publicly accessible, I’ve included screenshots of the bug tickets I created. Each file is named with its Jira ticket number and a short description, and those ticket IDs match the ones referenced in the test cases above. View the folder [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports).
 
 ## CI/CD via GitHub Actions
 This project uses GitHub Actions to automatically run Cypress tests on every pull request. The pipeline includes:
@@ -77,4 +77,4 @@ Cypress Cloud includes:
 
 Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs).  
 Note: API tests using cy.request() are executed in Node (outside the browser). As a result, console logs and network activity will not appear in Test Replay the way they do for UI tests.  
-For more details on stepping through previous runs, see the [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
+For more details on stepping through previous runs, see the [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay).
