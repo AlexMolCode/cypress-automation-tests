@@ -9,7 +9,7 @@ on:
 jobs:
   cypress-ui:
     runs-on: ubuntu-latest
-    container: cypress/browsers:node-20.18.0-chrome-126-ff-128  # includes Firefox 128 ESR
+    container: cypress/browsers:node-20.16.0-chrome-127.0.6533.88-1-ff-128.0.3-edge-127.0.2651.74-1  # includes Firefox 128 ESR for CI stability
     strategy:
       matrix:
         browser: [chrome, firefox] # Enable cross browser testing for Github Actions
