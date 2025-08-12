@@ -21,6 +21,8 @@ This project showcases my end-to-end UI and API automation skills using Cypress,
 
 ```bash
 cypress-automation-tests/
+├── .github/
+│   ├──  workflows/      # GitHub Actions workflow to run Cypress tests
 ├── cypress/
 │   ├── e2e/
 │   │   ├── api/         # API tests (Restful Booker)
