@@ -1,19 +1,19 @@
 # Cypress QA Automation Portfolio
 
-This project showcases my end-to-end UI and API automation skills using [Cypress](https://www.cypress.io/), complete with CI integration, cross-browser testing, and bug tracking via JIRA.
+This project showcases my end-to-end UI and API automation skills using Cypress, with CI/CD integration, cross-browser testing, and bug tracking in Jira.
 
 ---
 
-## Project Overview
+## Project Overview  
 
 | Area | Description |
 |------|-------------|
-| UI Testing | Cypress UI tests using [SauceDemo](https://www.saucedemo.com/). Shows automated end to end testing of an ecommerce site. |
-| Mobile Testing | Dedicated spec that tests the SauceDemo site UI in mobile view. Shows the importance of UI testing on mobile. |
-| API Testing | Cypress API tests using [Restful Booker](https://restful-booker.herokuapp.com/apidoc). Shows automated testing of CRUD APIs. |
-| CI/CD | Cypress tests running in GitHub Actions using both Chrome and Firefox. Shows enforcement that automated tests must pass before merging. |
-| Bug Tracking | Known issues documented in JIRA, with test coverage for expected vs. actual behavior. Shows communication of bug issues to stakeholders. |
-| Reporting | Reports using Mochawesome (locally) and Cypress Cloud. Shows pass/fail tests in easier to read reports. |
+| **UI Testing** | Automated end-to-end tests of the [SauceDemo](https://www.saucedemo.com/) ecommerce site using Cypress. |
+| **Mobile Testing** | Mobile viewport spec to validate SauceDemo’s UI responsiveness. |
+| **API Testing** | CRUD API tests for [Restful Booker](https://restful-booker.herokuapp.com/apidoc) using Cypress. |
+| **Bug Tracking** | Known issues documented in Jira, linked to related test coverage. |
+| **CI/CD** | GitHub Actions pipeline runs Cypress tests in Chrome and Firefox on each branch merge, blocking merges if tests fail. |
+| **Reporting** | Local Mochawesome reports and Cypress Cloud integration for visual pass/fail summaries and replayable test runs. |
 
 ---
 
@@ -23,66 +23,58 @@ This project showcases my end-to-end UI and API automation skills using [Cypress
 project-root/
 ├── cypress/
 │   ├── e2e/
-│   │   ├── api/         # Cypress API tests (Restful Booker)
-│   │   ├── ui/          # Cypress UI tests (SauceDemo)
-│   ├── support/         # Custom commands and shared test setup
-│   ├── reports/         # Mochawesome test reports (gitignored)
-│   ├── data/            # Static data and request bodies for API tests
-│   ├── selectors/       # Page object-style selectors for UI tests
-├── cypress.config.js    # Cypress configuration file
-├── cypress.env.json     # Local environment variables for API auth (gitignored)
-├── package.json         # Project dependencies
-├── .gitignore           # Files and folders ignored by Git
-├── README.md            # Project overview and setup instructions
-├── bug-reports          # Screenshots of JIRA-style bug tickets
+│   │   ├── api/         # API tests (Restful Booker)
+│   │   ├── ui/          # UI tests (SauceDemo)
+│   ├── support/         # Reusable UI commands (login, navigation)
+│   ├── reports/         # Mochawesome test reports (local only)
+│   ├── data/            # Static records for API test inputs
+│   ├── selectors/       # Page object Model selectors for UI tests
+├── bug-reports          # Screenshots of Jira bug tickets
 ```
-## How to Run the Tests Locally
+## Running Tests Locally
 1. Make sure you have Git installed: [Download Git](https://git-scm.com/downloads)
 2. Clone this repo to your machine: `git clone https://github.com/AlexMolCode/cypress-automation-tests.git`
-3. Navigate to the project directory and install dependencies (includes Cypress): `npm install`
-4. To run API tests, create a `cypress.env.json` file in the root directory with the JSON record below. This is required to provide authentication values for generating a token.
-   You can retrieve the actual credentials from the [Restful Booker site](https://restful-booker.herokuapp.com/apidoc/index.html#api-Booking-CreateBooking)
+3. Navigate to the downloaded project directory (cypress-automation-tests) and install dependencies (includes Cypress): `npm install`
+4. To successfully run API tests that require an authentication token, create a `cypress.env.json` file in the root directory with the JSON record below.
+   Retrieve the credentials from the Restful Booker [API docs](https://restful-booker.herokuapp.com/apidoc/index.html#api-Auth-CreateToken)
 ```json
 {
-  "BOOKING_USERNAME": "X",
-  "BOOKING_PASSWORD": "Y"
+  "BOOKING_USERNAME": "api-username",
+  "BOOKING_PASSWORD": "api-password"
 }
 ```
-5. Run all tests on the command line: `npx cypress run`
-6. Run tests by type on the command line:
+5. To run all tests on the command line: `npx cypress run`
+6. To run tests by each type on the command line:
 - API tests: `npx cypress run --spec "cypress/e2e/api/*.cy.js"`
 - UI tests: `npx cypress run --spec "cypress/e2e/ui/*.cy.js"`
-7. Or use the Cypress test runner UI to run tests individually.
+7. To use the Cypress test runner UI to run tests: `npx cypress open`
 
-## Bug Reports
+## Bug Tracking
 Automated tests for known bugs are located in:
 - `ui-error-spec.cy.js`
 - `api-error-spec.cy.js`
 - `auth.cy.js` (for authentication-related errors)<br>
 
-To address the challenge of accessing a JIRA board, I have taken screenshots of the bug tickets I created instead. Each file is named using the JIRA ticket number and a short description. The folder of screenshots on Github is linked [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports)
+Since the JIRA board isn’t publicly accessible, I’ve included screenshots of the bug tickets I created. Each file is named with its Jira ticket number and a short description, and those ticket IDs match the ones referenced in the test cases above. View the folder [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports)
 
 ## CI/CD via GitHub Actions
-This project is integrated with GitHub Actions to automatically run Cypress tests with *every* pull request. The pipeline runs:
+This project uses GitHub Actions to automatically run Cypress tests on every pull request. The pipeline includes:
 - All UI tests using both Chrome and Firefox
 - All API tests
-These checks ensure that all test cases are validated before any code is merged, simulating a real-world CI/CD pipeline.
+
+These checks validate all test cases before code is merged, simulating a real-world CI/CD workflow.
 
 ## Local Test Reports with Mochawesome
-After each run, Cypress generates reports in the cypress/reports/ folder. This includes:
-- An HTML summary of test results and statuses
-- Screenshots for failed tests (automatically captured)
+When Cypress tests are run locally in headless mode (`npx cypress run`), Mochawesome generates an easy-to-read HTML report in the `cypress/reports/` folder. The output looks like this:
 
-You can also view test reports generated during GitHub Actions by visiting the [Actions](https://github.com/AlexMolCode/cypress-automation-tests/actions) tab and downloading the report artifacts.  
-Note: GitHub does not render HTML reports in-browser. You must download them to view locally.
 
-## Cypress Cloud Integration
-All test runs are automatically recorded to Cypress Cloud via GitHub Actions on every pull request.
+## Cypress Cloud Report Integration
+On every pull request, the full test suite runs and the results are uploaded to Cypress Cloud.
 
 Cypress Cloud includes:
 - Screenshots, videos, and command logs for each test
-- Test Replay button for step-by-step debugging
+- A **Test Replay** feature for step-by-step debugging
 
 Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs).  
-Note: API tests using cy.request() are executed in Node (not in the browser). Because of this, console logs and network activity will not appear in Cloud replay like they do in UI tests.  
-Here is documentation on Cypress Cloud's Test Replay to step through previous test runs: [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
+Note: API tests using cy.request() are executed in Node (outside the browser). As a result, console logs and network activity will not appear in Test Replay the way they do for UI tests.  
+For more details on stepping through previous runs, see the [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay)
