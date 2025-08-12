@@ -29,7 +29,7 @@ cypress-automation-tests/
 │   ├── reports/         # Mochawesome test reports (local only)
 │   ├── selectors/       # Page object Model selectors for UI tests
 │   ├── support/         # Reusable UI commands (login, navigation)
-├── bug-reports          # Screenshots of Jira bug tickets
+├── bug-reports/         # Screenshots of Jira bug tickets
 ```
 ## Running Tests Locally
 1. Make sure you have Git installed: [Download Git](https://git-scm.com/downloads)
