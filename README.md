@@ -49,6 +49,11 @@ project-root/
 - UI tests: `npx cypress run --spec "cypress/e2e/ui/*.cy.js"`
 7. To use the Cypress test runner UI to run tests: `npx cypress open`
 
+## Mobile Testing
+This project includes a Cypress spec that validates SauceDemo’s UI responsiveness in a mobile viewport (Samsung Galaxy S22, 360×780). This ensures the application layout and functionality remain consistent on smaller screens. The test file is at `cypress/e2e/mobile-spec.cy.js`.
+
+![Mobile viewport test of SauceDemo site](./images/mobile-saucedemo.png)
+
 ## Bug Tracking
 Automated tests for known bugs are located in:
 - `ui-error-spec.cy.js`
