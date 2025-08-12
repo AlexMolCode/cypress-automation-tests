@@ -13,7 +13,7 @@ This project showcases my end-to-end UI and API automation skills using Cypress,
 | **API Testing** | CRUD API tests for the [Restful Booker](https://restful-booker.herokuapp.com/apidoc) API test site using Cypress. |
 | **Bug Tracking** | Known issues documented in Jira, linked to related test coverage. |
 | **CI/CD** | GitHub Actions pipeline runs Cypress tests in Chrome and Firefox on each branch merge, blocking merges if tests fail. |
-| **Reporting** | Local Mochawesome reports and Cypress Cloud integration for visual pass/fail summaries and replayable test runs. |
+| **Reporting** | Local Mochawesome reports for visual pass/fail summaries. |
 
 ---
 
@@ -71,21 +71,9 @@ These checks ensures all test cases before code is merged, simulating a real-wor
 
 ![CI Pipeline](./images/ci-pipeline.png)
 
-
 ## Local Test Reports with Mochawesome
 When Cypress tests are run locally in headless mode (`npx cypress run`), Mochawesome generates an easy-to-read HTML report in the `cypress/reports/` folder. The report lists each scenario as an individual test case with a clear pass/fail status, and attaches screenshots automatically for any failed tests.
 
 ![Mochawesome Report](./images/mochawesome-report.png)
 
-
-## Cypress Cloud Report Integration
-On every pull request, the full test suite runs and the results are uploaded to Cypress Cloud.
-
-Cypress Cloud includes:
-- Screenshots, videos, and command logs for each test
-- A **Test Replay** feature for step-by-step debugging
-
-Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs).  
-Note: API tests using cy.request() are executed in Node (outside the browser). As a result, console logs and network activity will not appear in Test Replay the way they do for UI tests.
-
-For more details on stepping through previous runs, see the [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay).
+*Note: This project was previously integrated with Cypress Cloud as well for storing and reviewing test runs. Due to plan limits, this feature is currently disabled in favor of local Mochawesome reports and GitHub Actions CI results.*
