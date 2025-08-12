@@ -8,9 +8,9 @@ This project showcases my end-to-end UI and API automation skills using Cypress,
 
 | Area | Description |
 |------|-------------|
-| **UI Testing** | Automated end-to-end tests of the [SauceDemo](https://www.saucedemo.com/) ecommerce site using Cypress. |
+| **UI Testing** | Automated end-to-end tests of the [SauceDemo](https://www.saucedemo.com/) ecommerce test site using Cypress. |
 | **Mobile Testing** | Mobile viewport spec to validate SauceDemo’s UI responsiveness. |
-| **API Testing** | CRUD API tests for [Restful Booker](https://restful-booker.herokuapp.com/apidoc) using Cypress. |
+| **API Testing** | CRUD API tests for the [Restful Booker](https://restful-booker.herokuapp.com/apidoc) API test site using Cypress. |
 | **Bug Tracking** | Known issues documented in Jira, linked to related test coverage. |
 | **CI/CD** | GitHub Actions pipeline runs Cypress tests in Chrome and Firefox on each branch merge, blocking merges if tests fail. |
 | **Reporting** | Local Mochawesome reports and Cypress Cloud integration for visual pass/fail summaries and replayable test runs. |
@@ -62,10 +62,15 @@ This project uses GitHub Actions to automatically run Cypress tests on every pul
 - All UI tests using both Chrome and Firefox
 - All API tests
 
-These checks validate all test cases before code is merged, simulating a real-world CI/CD workflow.
+These checks ensures all test cases before code is merged, simulating a real-world CI/CD workflow. Below is an example of a successful test run for this branch.
+
+![CI Pipeline](./images/ci-pipeline.png)
+
 
 ## Local Test Reports with Mochawesome
-When Cypress tests are run locally in headless mode (`npx cypress run`), Mochawesome generates an easy-to-read HTML report in the `cypress/reports/` folder. The output looks like this:
+When Cypress tests are run locally in headless mode (`npx cypress run`), Mochawesome generates an easy-to-read HTML report in the `cypress/reports/` folder. The report lists each scenario as an individual test case with a clear pass/fail status, and attaches screenshots automatically for any failed tests.
+
+![Mochawesome Report](./images/mochawesome-report.png)
 
 
 ## Cypress Cloud Report Integration
@@ -76,5 +81,6 @@ Cypress Cloud includes:
 - A **Test Replay** feature for step-by-step debugging
 
 Previous Cypress Cloud runs for this portfolio can be accessed on the [latest runs page](https://cloud.cypress.io/projects/in78pu/runs).  
-Note: API tests using cy.request() are executed in Node (outside the browser). As a result, console logs and network activity will not appear in Test Replay the way they do for UI tests.  
+Note: API tests using cy.request() are executed in Node (outside the browser). As a result, console logs and network activity will not appear in Test Replay the way they do for UI tests.
+
 For more details on stepping through previous runs, see the [Test Replay Documentation](https://docs.cypress.io/cloud/features/test-replay).
