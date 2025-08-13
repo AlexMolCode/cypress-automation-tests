@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - main
-  pull_request:  # Runs on all PRs, no matter the branch
+  pull_request:  # Runs on all PRs
+
+# Needed to push to gh-pages
+permissions:
+  contents: write  
 
 jobs:
   cypress-ui:
@@ -20,25 +24,31 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # This version will be supported for a while
+          node-version: 20
 
       - name: Install dependencies
         run: npm install
 
       - name: Clean Reports Folder
-        run: rm -rf cypress/reports || true # Delete reports folder (removes old screenshots, logs etc)
+        run: rm -rf cypress/reports || true 
 
       - name: Run UI Tests in ${{ matrix.browser }}
-        env: 
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # Get record key from Github secrets for Cypress Cloud runs
-        run: npx cypress run --browser ${{ matrix.browser }} --headless --spec "cypress/e2e/ui/*.cy.js" --record --group "UI Tests - ${{ matrix.browser }}"
+        # Get record key from Github secrets for Cypress Cloud runs - disabled for now
+        #env: 
+        #  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        run: npx cypress run \
+              --browser ${{ matrix.browser }} \
+              --headless --spec "cypress/e2e/ui/*.cy.js" \
+              --record \
+              --group "UI Tests - ${{ matrix.browser }}" \
+              --reporter mochawesome \
+              --reporter-options "reportDir=cypress/reports,overwrite=false,html=false,json=true"
 
-      - name: Upload UI report
+      - name: Upload mochawesome JSON (${{ matrix.browser }})
         uses: actions/upload-artifact@v4
         with:
-          name: mochawesome-ui-${{ matrix.browser }} # Generates a report for each browser
+          name: mochawesome-ui-${{ matrix.browser }} # Filename for the report
           path: cypress/reports/
-          retention-days: 7 # Keep files for 7 days instead of the default 90
 
   cypress-api:
     runs-on: ubuntu-latest
@@ -58,15 +68,84 @@ jobs:
         run: rm -rf cypress/reports || true
 
       - name: Run API Tests 
+        # Get API auth login from Github secrets
         env:
-          CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }} # Get API auth login from Github secrets
+          CYPRESS_BOOKING_USERNAME: ${{ secrets.CYPRESS_BOOKING_USERNAME }} 
           CYPRESS_BOOKING_PASSWORD: ${{ secrets.CYPRESS_BOOKING_PASSWORD }}
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} 
-        run: npx cypress run --headless --spec "cypress/e2e/api/*.cy.js" --record --group "API Tests"
+        run: npx cypress run \
+              --headless \
+              --spec "cypress/e2e/api/*.cy.js" \
+              --record \
+              --group "API Tests" \
+              --reporter mochawesome \
+              --reporter-options "reportDir=cypress/reports,overwrite=false,html=false,json=true"
 
-      - name: Upload API report
+      - name: Upload mochawesome JSON (api)
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-api
           path: cypress/reports/
-          retention-days: 7
+  
+  # Build the HTML report to be displayed
+  build-report:
+    needs: [cypress-ui, cypress-api]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install report tools
+        run: npm ci
+
+      - name: Download all JSON artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: mochawesome-raw
+
+      # Merge ALL JSONs from UI (both browsers) and API into one
+      - name: Merge mochawesome JSON
+        run: |
+          npx mochawesome-merge "mochawesome-raw/**/**/*.json" > /tmp/merged.json
+
+      - name: Generate combined HTML report
+        run: |
+          mkdir -p public
+          npx marge /tmp/merged.json \
+            --reportDir public \
+            --reportFilename index.html \
+            --inline \
+            --reportTitle "Cypress UI + API (All Browsers)"
+
+      - name: Upload combined HTML report (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report
+          path: public
+
+  # Publish to GitHub Pages ONLY on push to main
+  deploy:
+    needs: build-report
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: mochawesome-report
+          path: public
+     
+      # The JamesIves public repo enables publishing reports to GitHub Pages
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4 
+        with:
+          branch: gh-pages
+          folder: public
