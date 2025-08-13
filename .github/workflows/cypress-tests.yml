@@ -108,9 +108,20 @@ jobs:
         with:
           path: mochawesome-raw
 
+      - name: List downloaded artifacts (debug)
+        run: |
+          echo "Artifacts tree:"
+          ls -lahR mochawesome-raw || true
+          echo "Any JSON?"
+          find mochawesome-raw -type f -name '*.json' -maxdepth 5 -print || true
+
       # Merge ALL JSONs from UI (both browsers) and API into one
       - name: Merge mochawesome JSON
         run: |
+          FILES=$(find mochawesome-raw -type f -name '*.json' -maxdepth 5)
+          if [ -z "$FILES" ]; then
+          echo "No mochawesome JSON files found under mochawesome-raw/"
+          exit 1
           npx mochawesome-merge "mochawesome-raw/**/**/*.json" > /tmp/merged.json
 
       - name: Generate combined HTML report
