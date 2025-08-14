@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-ui-${{ matrix.browser }} # Filename for the report
-          path: cypress/reports/**/*.json
+          path: cypress/reports/
           if-no-files-found: error
 
   cypress-api:
@@ -88,7 +88,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-api
-          path: cypress/reports/**/*.json
+          path: cypress/reports/
           if-no-files-found: error
   
   # Build the HTML report to be displayed

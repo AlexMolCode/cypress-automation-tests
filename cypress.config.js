@@ -18,7 +18,7 @@ module.exports = defineConfig({
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
       reportDir: 'cypress/reports',
-      overwrite: true, 
+      overwrite: false, 
       html: !isCI, // Only generate HTML when generating report locally
       json: true,
       charts: true, 
