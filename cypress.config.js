@@ -2,6 +2,7 @@ const { defineConfig } = require('cypress');
 const webpack = require('@cypress/webpack-preprocessor');
 const webpackConfig = require('./webpack.config.js');
 
+const isCI = process.env.CI === 'true';
 module.exports = defineConfig({
   projectId: 'in78pu', // Project ID is used for Cypress Cloud
   e2e: {
@@ -17,8 +18,8 @@ module.exports = defineConfig({
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
       reportDir: 'cypress/reports',
-      overwrite: true, // Only displays one report per run locally
-      html: true,
+      overwrite: true, 
+      html: !isCI, // Only generate HTML when generating report locally
       json: true,
       charts: true, 
       embeddedScreenshots: true,

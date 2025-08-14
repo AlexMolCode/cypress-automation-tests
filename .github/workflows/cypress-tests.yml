@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-ui-${{ matrix.browser }} # Filename for the report
-          path: cypress/reports/
+          path: cypress/reports/**/*.json
 
   cypress-api:
     runs-on: ubuntu-latest
@@ -85,7 +85,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-api
-          path: cypress/reports/
+          path: cypress/reports/**/*.json
   
   # Build the HTML report to be displayed
   build-report:
