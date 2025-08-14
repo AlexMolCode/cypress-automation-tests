@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-ui-${{ matrix.browser }} # Filename for the report
-          path: cypress/reports/
+          path: cypress/reports/**/*.json
           if-no-files-found: error
 
   cypress-api:
@@ -88,7 +88,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: mochawesome-api
-          path: cypress/reports/
+          path: cypress/reports/**/*.json
           if-no-files-found: error
   
   # Build the HTML report to be displayed
@@ -110,19 +110,21 @@ jobs:
       - name: Download all JSON artifacts
         uses: actions/download-artifact@v4
         with:
+          pattern: mochawesome-* 
           path: mochawesome-raw
+          merge-multiple: true
 
       - name: List downloaded artifacts (debug)
         run: |
           echo "Artifacts tree:"
           ls -lahR mochawesome-raw || true
           echo "Any JSON?"
-          find mochawesome-raw -type f -name '*.json' -maxdepth 5 -print || true
+          find mochawesome-raw -maxdepth 5 -type f -name '*.json' -print || true
 
       # Merge ALL JSONs from UI (both browsers) and API into one
       - name: Merge mochawesome JSON
         run: |
-          FILES=$(find mochawesome-raw -type f -name '*.json' -maxdepth 5)
+          FILES=$(find mochawesome-raw -maxdepth 5 -type f -name '*.json')
           if [ -z "$FILES" ]; then
           echo "No mochawesome JSON files found under mochawesome-raw/"
           exit 1
