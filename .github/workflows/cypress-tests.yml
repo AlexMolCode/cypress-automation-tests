@@ -40,9 +40,7 @@ jobs:
               --browser ${{ matrix.browser }} \
               --headless --spec "cypress/e2e/ui/*.cy.js" \
               --record \
-              --group "UI Tests - ${{ matrix.browser }}" \
-              --reporter mochawesome \
-              --reporter-options "reportDir=cypress/reports,overwrite=false,html=false,json=true"
+              --group "UI Tests - ${{ matrix.browser }}"             
 
       - name: List mochawesome outputs (debug)
         run: ls -lahR cypress/reports || true
@@ -81,9 +79,7 @@ jobs:
               --headless \
               --spec "cypress/e2e/api/*.cy.js" \
               --record \
-              --group "API Tests" \
-              --reporter mochawesome \
-              --reporter-options "reportDir=cypress/reports,overwrite=false,html=false,json=true"
+              --group "API Tests"
 
       - name: List mochawesome outputs (debug)
         run: ls -lahR cypress/reports || true
