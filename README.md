@@ -69,7 +69,7 @@ This project uses GitHub Actions to automatically run Cypress tests on every pul
 - All UI tests using both Chrome and Firefox
 - All API tests
 
-These checks ensures the regression suite passes before code is merged, simulating a true CI/CD workflow. Below is an example of a successful test run.
+These checks ensure the regression suite passes before code is merged, simulating a true CI/CD workflow. Below is an example of a successful test run.
 
 ![CI Pipeline](./images/ci-pipeline.png)
 
