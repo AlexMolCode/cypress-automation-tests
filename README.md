@@ -8,7 +8,7 @@ This project showcases my end-to-end UI and API automation skills using Cypress,
 
 | Area | Description |
 |------|-------------|
-| **UI Testing** | Automated end-to-end tests of the [SauceDemo](https://www.saucedemo.com/) ecommerce test site using Cypress. |
+| **UI Testing** | Automated end-to-end tests of the [SauceDemo](https://www.saucedemo.com/) e-commerce test site using Cypress. |
 | **Mobile Testing** | Mobile viewport spec to validate SauceDemo’s UI responsiveness. |
 | **API Testing** | CRUD API tests for the [Restful Booker](https://restful-booker.herokuapp.com/apidoc) API test site using Cypress. |
 | **Bug Tracking** | Known issues documented in Jira, linked to related test coverage. |
@@ -29,16 +29,16 @@ cypress-automation-tests/
 │   │   ├── ui/          # UI tests (SauceDemo)
 │   ├── data/            # Static records for API test inputs
 │   ├── reports/         # Mochawesome test reports (local only)
-│   ├── selectors/       # Page object Model selectors for UI tests
-│   ├── support/         # Reusable UI commands (login, navigation)
+│   ├── selectors/       # Page Object Model selectors for UI tests
+│   ├── support/         # Reusable UI commands (login, menu navigation)
 ├── bug-reports/         # Screenshots of Jira bug tickets
 ```
 ## Running Tests Locally
 1. Make sure you have Git installed: [Download Git](https://git-scm.com/downloads)
 2. Clone this repo to your machine: `git clone https://github.com/AlexMolCode/cypress-automation-tests.git`
-3. Navigate to the downloaded project directory (cypress-automation-tests) and install dependencies (includes Cypress): `npm install`
+3. Navigate to the downloaded folder (cypress-automation-tests) and install dependencies (it includes Cypress): `npm install`
 4. To successfully run API tests that require an authentication token, create a `cypress.env.json` file in the root directory with the JSON record below.
-   Retrieve the credentials from the Restful Booker [API docs](https://restful-booker.herokuapp.com/apidoc/index.html#api-Auth-CreateToken).
+   Replace the credential placeholder values below with the ones from the Restful Booker [API docs](https://restful-booker.herokuapp.com/apidoc/index.html#api-Auth-CreateToken).
 ```json
 {
   "BOOKING_USERNAME": "api-username",
@@ -62,19 +62,19 @@ Automated tests for known bugs are located in:
 - `cypress/e2e/api/api-error-spec.cy.js`
 - `cypress/e2e/api/auth-spec.cy.js`
 
-Since the JIRA board isn’t publicly accessible, I’ve included screenshots of the bug tickets I created. Each file is named with its Jira ticket number and a short description, and those ticket IDs match the ones referenced in the test cases above. View the folder [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports).
+Since the Jira board isn’t publicly accessible, I’ve included screenshots of the bug tickets I created. Each file is named with its ticket number and a short description, and those ticket IDs match the ones referenced in the comments within the files above. View the folder [here](https://github.com/AlexMolCode/cypress-automation-tests/tree/main/bug-reports).
 
 ## CI/CD via GitHub Actions
 This project uses GitHub Actions to automatically run Cypress tests on every pull request. The pipeline includes:
 - All UI tests using both Chrome and Firefox
 - All API tests
 
-These checks ensures all test cases before code is merged, simulating a real-world CI/CD workflow. Below is an example of a successful test run for this branch.
+These checks ensures the regression suite passes before code is merged, simulating a true CI/CD workflow. Below is an example of a successful test run.
 
 ![CI Pipeline](./images/ci-pipeline.png)
 
 ## Local Test Reports with Mochawesome
-When Cypress tests are run locally in headless mode (`npx cypress run`), Mochawesome generates an easy-to-read HTML report in the `cypress/reports/` folder. The report lists each scenario as an individual test case with a clear pass/fail status, and attaches screenshots automatically for any failed tests.
+When Cypress tests are run locally in headless mode (`npx cypress run`), Mochawesome generates a visual HTML report in the `cypress/reports/` folder. The report lists each scenario as an individual test case with a pass/fail status and attaches screenshots for failed tests.
 
 ![Mochawesome Report](./images/mochawesome-report.png)
 
